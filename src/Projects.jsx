@@ -59,7 +59,7 @@ function Projects() {
                   A Medical Records System designed to help the Rural Health Unit of Burgos Isabela
                   transition from a paper-based Medical Records System to a Computerized one.
                 </p>
-                <p>
+                <p className="card-text content-text">
                   Note: This is a capstone project not an official system/application used by The
                   Municipality of Burgos.
                 </p>
