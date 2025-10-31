@@ -12,29 +12,28 @@ function Homepage(){
                 <nav
                   className="navbar navbar-expand-xs navbar-dark fixed-top"
                   style={{
-                    background: 'linear-gradient(to right, #731cff, #b366ff)',
-                    padding: '15px 30px',
+                    background: 'linear-gradient(to right, #731cff, #b366ff)'
                   }}
                 >
                   <div className="container d-flex align-items-center justify-content-start">
                     <img src={Pfp} alt="Profile" className="pfp" />
-                    <div style={{paddingLeft: "30px"}}>
+                    <div style={{paddingLeft: "20px"}}>
                       <h3 className="fw-bold mb-1 text-white">Jayrus T. Luy</h3>
                       <h5 className="fw-semibold text-white mb-2">Online Portfolio</h5>
-                      <nav className="nav">
+                      <div style={{display: 'flex'}}>
                         <Link className="nav-link text-white p-0 me-3" to="/">
                           About me
                         </Link>
-                        <Link className="nav-link text-white p-0 me-3" to="/projects">
+                        <Link className="nav-link text-white p-0 me-auto" to="/projects">
                           My projects
                         </Link>
-                      </nav>
+                      </div>
                     </div>
                   </div>
                 </nav>
               </div>
 
-              <div style={{ paddingTop: '200px' }}></div>
+              <div style={{ paddingTop: '180px' }}></div>
 
                 {/* About Me Section */}
                     <div className="container">

@@ -6,12 +6,6 @@ body {
   overflow-x: hidden;
 }
 
-@media (max-width: 768px) {
-  body {
-    padding-top: 80px;
-  }
-}
-
 .subtext{
   font-weight: bold;
    color: white;

@@ -14,32 +14,31 @@ function Projects() {
       <div className="container">
         <title>My Projects</title>
         {/* Navbar */}
-        <nav
-          className="navbar navbar-expand-sm navbar-dark fixed-top"
-          style={{
-            background: 'linear-gradient(to right, #731cff, #b366ff)',
-            padding: '15px 30px',
-          }}
-        >
-          <div className="container d-flex align-items-center justify-content-start">
-            <img src={Pfp} alt="Profile" className="pfp" />
-            <div style={{paddingLeft: "30px"}}>
-              <h3 className="fw-bold mb-1 text-white">Jayrus T. Luy</h3>
-              <h5 className="fw-semibold text-white mb-2">Online Portfolio</h5>
-              <nav className="nav">
-                <Link className="nav-link text-white p-0 me-3" to="/">
-                  About me
-                </Link>
-                <Link className="nav-link text-white p-0 me-3" to="/projects">
-                  My projects
-                </Link>
-              </nav>
-            </div>
-          </div>
-        </nav>
-      </div>
-
-      <div style={{ paddingTop: '200px' }}></div>
+                        <nav
+                          className="navbar navbar-expand-xs navbar-dark fixed-top"
+                          style={{
+                            background: 'linear-gradient(to right, #731cff, #b366ff)'
+                          }}
+                        >
+                          <div className="container d-flex align-items-center justify-content-start">
+                            <img src={Pfp} alt="Profile" className="pfp" />
+                            <div style={{paddingLeft: "20px"}}>
+                              <h3 className="fw-bold mb-1 text-white">Jayrus T. Luy</h3>
+                              <h5 className="fw-semibold text-white mb-2">Online Portfolio</h5>
+                              <div style={{display: 'flex'}}>
+                                <Link className="nav-link text-white p-0 me-3" to="/">
+                                  About me
+                                </Link>
+                                <Link className="nav-link text-white p-0 me-auto" to="/projects">
+                                  My projects
+                                </Link>
+                              </div>
+                            </div>
+                          </div>
+                        </nav>
+        </div>
+        
+      <div style={{ paddingTop: '180px' }}></div>
 
       <div className="container">
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
