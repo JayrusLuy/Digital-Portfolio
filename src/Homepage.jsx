@@ -55,7 +55,7 @@ function Homepage(){
                                 I am a hardworking and dedicated individual seeking an IT-related position where I can apply my technical knowledge, grow professionally, and contribute meaningfully to innovative projects.
                             </p>
                             <p>
-                                Feel free to explore my online portfolio to learn more about my work, projects, and achievements.
+                                Feel free to explore my online portfolio to learn more about my projects and skills.
                             </p>
                             </div>
                         </div>
