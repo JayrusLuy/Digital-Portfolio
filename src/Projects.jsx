@@ -170,19 +170,21 @@ function Projects() {
               <div className="card-body">
                 <div className="card-header custom-card-border">
                   <center>
-                    <h5>Digital Portfolio</h5>
+                    <h5>Online Portfolio</h5>
                   </center>
                 </div>
                 <br />
                 <p className="card-text content-text">
-                  A self-made digital portfolio to showcase my skills, projects, and allow a
-                  recruiter to contact me.
+                  A self-made digital portfolio to showcase my skills, and projects.
+                </p>
+                <p className="card-text content-text">
+                  Note: There was supposed to be a Node.JS backend for this project but due to lack of web hosting budget I am unable to deploy it.
                 </p>
                 <div className="card-footer custom-card-border">
                   <center>
                     Deployed October 2025
                     <br />
-                    React.JS | Node.JS
+                    React.JS
                     <br />
                     <a
                       className="link-underline-primary"
