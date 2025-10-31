@@ -33,9 +33,6 @@ function Projects() {
                 <Link className="nav-link text-white p-0 me-3" to="/projects">
                   My projects
                 </Link>
-                <Link className="nav-link text-white p-0" to="/contact">
-                  Contact me
-                </Link>
               </nav>
             </div>
           </div>
@@ -190,7 +187,7 @@ function Projects() {
                     <br />
                     <a
                       className="link-underline-primary"
-                      href="#"
+                      href="https://github.com/JayrusLuy/Digital-Portfolio"
                       target="_blank"
                       rel="noopener noreferrer"
                     >

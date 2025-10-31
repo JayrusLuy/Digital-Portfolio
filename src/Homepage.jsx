@@ -28,9 +28,6 @@ function Homepage(){
                         <Link className="nav-link text-white p-0 me-3" to="/projects">
                           My projects
                         </Link>
-                        <Link className="nav-link text-white p-0" to="/contact">
-                          Contact me
-                        </Link>
                       </nav>
                     </div>
                   </div>

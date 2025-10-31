@@ -5,9 +5,11 @@ import Projects from './Projects';
 
 function App() {
   return (
-    <Router basename="/Digital-Portfolio/">
+    <Router basename="/Digital-Portfolio">
+      <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/projects" element={<Projects />} />
+      </Routes>
     </Router>
   );
 }
