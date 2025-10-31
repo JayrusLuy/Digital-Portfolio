@@ -184,7 +184,7 @@ function Projects() {
                   <center>
                     Deployed October 2025
                     <br />
-                    React.JS
+                    React.JS | Bootstrap
                     <br />
                     <a
                       className="link-underline-primary"
