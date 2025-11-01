@@ -104,7 +104,7 @@ function Projects() {
                 </p>
                 <div className="card-footer custom-card-border">
                   <center>
-                    Coming Soon
+                    Deployed April 2025
                     <br />
                     VB.NET | MySQL
                     <br />
