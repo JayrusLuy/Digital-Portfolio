@@ -165,7 +165,7 @@ function Contact() {
               </div>
               <div className="modal-body text-white" style={{ borderTop: "1px solid #731cff", borderBottom: "1px solid #731cff" }}>
                 Backend functionalities are not working due to GitHub Pages limitations.
-                This page only serves as proof that Node.js was used in this Digital Portfolio.
+                This page only serves as proof that Node.js was used in this Online Portfolio.
               </div>
               <div className="modal-footer" style={{ borderColor: "#731cff" }}>
                 <button className="btn" style={{ backgroundColor: "#731cff", color: "white" }} onClick={closeModal}>

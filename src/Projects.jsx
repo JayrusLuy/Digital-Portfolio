@@ -192,7 +192,7 @@ function Projects() {
                 <p className="card-text content-text">
                   Notice: Backend functionalities are not working due to GitHub Pages
                           limitations. This page only serves as proof that Node.js was used
-                          in this Digital Portfolio. Please check the source code on my GitHub.
+                          in this Online Portfolio. Please check the source code on my GitHub.
                 </p>
                 <div className="card-footer custom-card-border">
                   <center>
