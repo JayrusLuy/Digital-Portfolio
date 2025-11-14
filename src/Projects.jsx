@@ -14,28 +14,34 @@ function Projects() {
       <div className="container">
         <title>My Projects</title>
         {/* Navbar */}
-                        <nav
-                          className="navbar navbar-expand-xs navbar-dark fixed-top"
-                          style={{
-                            background: 'linear-gradient(to right, #731cff, #b366ff)'
-                          }}
-                        >
-                          <div className="container d-flex align-items-center justify-content-start">
-                            <img src={Pfp} alt="Profile" className="pfp" />
-                            <div style={{paddingLeft: "20px"}}>
-                              <h3 className="fw-bold mb-1 text-white">Jayrus T. Luy</h3>
-                              <h5 className="fw-semibold text-white mb-2">Online Portfolio</h5>
-                              <div style={{display: 'flex'}}>
-                                <Link className="nav-link text-white p-0 me-3" to="/">
-                                  About me
-                                </Link>
-                                <Link className="nav-link text-white p-0 me-auto" to="/projects">
-                                  My projects
-                                </Link>
-                              </div>
-                            </div>
-                          </div>
-                        </nav>
+              <nav
+                className="navbar navbar-dark fixed-top w-100"
+                style={{ background: 'linear-gradient(to right, #731cff, #b366ff)' }}
+              >
+              <div
+                className="container d-flex align-items-center flex-nowrap"
+                style={{ gap: '1rem' }}
+              >
+              <Link to="/contact" className="d-flex flex-shrink-0">
+                <img src={Pfp} alt="Profile" className="pfp" />
+              </Link>
+              <div className="d-flex flex-column flex-grow-1">
+                <div>
+                  <h3 className="fw-bold mb-1 text-white">Jayrus T. Luy</h3>
+                  <h5 className="fw-semibold text-white mb-2">Online Portfolio</h5>
+                </div>
+  
+                <div className="d-flex flex-wrap" style={{ gap: '1rem' }}>
+                  <Link className="nav-link text-white p-0 me-1" to="/">
+                    About me
+                  </Link>
+                  <Link className="nav-link text-white p-0 me-1" to="/projects">
+                    My projects
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </nav>
         </div>
         
       <div style={{ paddingTop: '180px' }}></div>
@@ -60,7 +66,7 @@ function Projects() {
                   transition from a paper-based Medical Records System to a Computerized one.
                 </p>
                 <p className="card-text content-text">
-                  Note: This is a capstone project not an official system/application used by The
+                  Notice: This is a capstone project not an official system/application used by The
                   Municipality of Burgos.
                 </p>
                 <div className="card-footer custom-card-border">
@@ -68,6 +74,7 @@ function Projects() {
                     Not Deployed
                     <br />
                     VB.NET | MySQL
+                    <br />
                     <br />
                     <a
                       className="link-underline-primary"
@@ -108,6 +115,7 @@ function Projects() {
                     <br />
                     VB.NET | MySQL
                     <br />
+                    <br />
                     <a
                       className="link-underline-primary"
                       href="https://github.com/JayrusLuy/Cashier-and-Project-Monitoring-System"
@@ -147,6 +155,7 @@ function Projects() {
                     <br />
                     VB.NET | MySQL
                     <br />
+                    <br />
                     <a
                       className="link-underline-primary"
                       href="https://github.com/JayrusLuy/UsamiWit-Quiz-Maker"
@@ -177,14 +186,30 @@ function Projects() {
                 <p className="card-text content-text">
                   A self-made digital portfolio to showcase my skills, and projects.
                 </p>
+                <p>
+                  Click the link below or the image at the top to view the Contact me page.
+                </p>
                 <p className="card-text content-text">
-                  Note: There was supposed to be a Node.JS backend for this project but due to lack of web hosting budget I am unable to deploy it.
+                  Notice: Backend functionalities are not working due to GitHub Pages
+                          limitations. This page only serves as proof that Node.js was used
+                          in this Digital Portfolio. Please check the source code on my GitHub.
                 </p>
                 <div className="card-footer custom-card-border">
                   <center>
                     Deployed October 2025
                     <br />
                     React.JS | Bootstrap
+                    <br />
+                    <br />
+                    <Link to ="/contact">
+                    <a
+                      className="link-underline-primary"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Check out Contact me page
+                    </a>
+                    </Link>
                     <br />
                     <a
                       className="link-underline-primary"
@@ -219,6 +244,7 @@ function Projects() {
                     Deployed July 2025
                     <br />
                     React.JS | Node.JS | MySQL
+                    <br />
                     <br />
                     <a className="link-underline-primary" href="#" target="_blank" rel="noopener noreferrer">
                       Sit tight I am currently developing this!
