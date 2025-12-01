@@ -198,7 +198,7 @@ function Projects() {
                   <center>
                     Deployed October 2025
                     <br />
-                    React.JS | Bootstrap
+                    React.JS | Node.JS | Bootstrap
                     <br />
                     <br />
                     <Link to ="/contact">

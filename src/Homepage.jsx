@@ -110,7 +110,7 @@ function Homepage() {
                   <li>Troubleshooting</li>
                   <li>Computer Systems Servicing</li>
                   <li>AI Tools Usage</li>
-                  <li>Git Commands Usage</li>
+                  <li>Git Version Control</li>
                   <li>Graphic Design</li>
                 </ul>
               </div>
