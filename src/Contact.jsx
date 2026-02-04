@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import Pfp from "./assets/profile picture/pfp.jpg";
+import Pfp from "./assets/profile picture/pfp.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import Emailme from "./Emailme";
