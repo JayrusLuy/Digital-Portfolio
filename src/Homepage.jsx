@@ -11,6 +11,7 @@ import javascript from './assets/programming_lang/javascript.png';
 import node from './assets/frameworks/node.png';
 import react from './assets/frameworks/react.png';
 import bootstrap from './assets/frameworks/bootstrap.png';
+
 function Homepage() {
   const [navbarScrolled, setNavbarScrolled] = useState(false);
   const heroRef = useRef(null);
@@ -110,7 +111,7 @@ function Homepage() {
         style={{
           transition: 'all 0.3s ease',
           backgroundColor: navbarScrolled ? 'white' : 'transparent',
-          boxShadow: navbarScrolled ? '0 4px 6px rgba(0,0,0,0.2)' : 'none', // add shadow only when white
+          boxShadow: navbarScrolled ? '0 4px 6px rgb(255, 255, 255)' : 'none', // add shadow only when white
         }}
       >
 
@@ -127,7 +128,7 @@ function Homepage() {
                 backgroundColor: navbarScrolled ? '#ffffff' : 'transparent',
               }}
             >
-              Home
+              About
             </Link>
 
             <Link
@@ -141,7 +142,7 @@ function Homepage() {
                 backgroundColor: 'transparent',
               }}
             >
-              Projects
+              My Projects
             </Link>
           </div>
         </div>
@@ -181,6 +182,40 @@ function Homepage() {
               />
             </div>
           </div>
+        </div>
+
+        {/* Scroll Down Indicator */}
+        <div
+          className="text-white text-center lead fw-normal"
+          style={{
+            position: 'absolute',
+            bottom: '30px',
+            width: '100%',
+            fontSize: '14px',
+          }}
+        >
+          <div>Scroll down to see more</div>
+          <div style={{ marginTop: '10px' }}></div>
+          <div
+            style={{
+              fontSize: '10px',
+              marginTop: '-5px',
+              display: 'inline-block',
+              animation: 'bob 3s ease-in-out infinite',
+            }}
+          >
+            ▼
+          </div>
+
+          {/* Add keyframes in a style tag */}
+          <style>
+            {`
+              @keyframes bob {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-10px); }
+              }
+            `}
+          </style>
         </div>
       </div>
 
