@@ -285,7 +285,7 @@ function Homepage() {
                     }}
                   />
                 )}
-                <h5 className="fw-bold mt-2">{skill.name}</h5>
+                <h6 className="fw-bold mt-2">{skill.name}</h6>
               </div>
             </div>
           ))}
@@ -334,7 +334,7 @@ function Homepage() {
                     }}
                   />
                 )}
-                <h5 className="fw-bold mt-2">{lib.name}</h5>
+                <h6 className="fw-bold mt-2">{lib.name}</h6>
               </div>
             </div>
           ))}
