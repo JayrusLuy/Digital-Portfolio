@@ -446,7 +446,7 @@ function Projects() {
             Online Portfolio
           </h1>
           <p style={{ fontSize: isMobile ? '1rem' : '1.25rem', marginTop: '0.5rem' }}>
-            A self-made digital portfolio to showcase my skills, projects, and achievements in web development.
+            A self-made digital portfolio to showcase my skills, projects, and achievements that also serves as a way to demonstrate my web development capabilities and allow for potential clients and employers to contact me.
           </p>
           <p style={{ marginTop: '1rem', fontSize: isMobile ? '0.9rem' : '1rem' }}>
             <strong>Tech stack:</strong><br />

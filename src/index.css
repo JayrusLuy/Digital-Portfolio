@@ -1,11 +1,40 @@
+/* Base body styling */
 body {
   background-image: linear-gradient(to bottom, rgb(255, 255, 255));
   min-height: 100vh;
-  font-family: sans-serif;
   width: 100%;
   overflow-x: hidden;
+
+  /* Century Gothic–style font */
+  font-family: 'Poppins', 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 }
 
+
+/* Apply to ALL text elements for consistency */
+p,
+a,
+button,
+.btn,
+span,
+li,
+strong,
+small,
+label,
+input,
+textarea,
+div {
+  font-family: 'Poppins', 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+}
+
+
+/* Headings — slightly heavier weight */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+  font-weight: 600;
+}
+
+
+/* Navbar */
 .portfolio-navbar {
   min-height: 70px;
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
@@ -16,89 +45,28 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+
+/* Navbar buttons */
 .nav-btn {
   border-radius: 5px;
   padding: 8px 18px;
   background-color: transparent;
   border: 1px solid #dcdcdc;
   color: #333;
-  font-weight: 700;
-  transition: background-color 0.2s ease;
-  font-size: 3rem;
+  font-weight: 600;
+  font-size: 1rem; /* fixed: 3rem was too large */
+  transition: all 0.2s ease;
 }
+
+
+/* Hover */
 .navbar .nav-btn:hover {
   background-color: #e5e5e5;
   color: #ffffff;
   text-decoration: none;
 }
+
 .nav-btn:hover {
   background-color: #868686 !important;
   text-decoration: none;
-}
-
-.subtext{
-  font-weight: bold;
-   color: white;
-  font-family: sans-serif;
-  text-align: left;
-  padding-left: 2px;
-}
-
-.maintext{
-  font-weight: bold;
-  color: white;
-  font-family: sans-serif;
-  text-align: left;
-  padding-top: 30px;
-  line-height: 1.1;
-}
-
-.pfp {
-  border-radius: 50%;
-  border: 5px solid #731cff;
-  height: auto;
-  width: 150px;
-}
-
-.content-text {
-  text-align: justify;
-  hyphens: auto;
-  color: rgb(255, 255, 255);
-  size: 10;
-  font-family: arial;
-}
-
-.custom-card-border {
-  border-color: #731cff !important;
-}
-
-.project-pic {
-  max-width: 200px;
-  max-height: 200px;
-  align-items: center;
-  border-radius: 500%;
-  position: relative;
-  top: 15px;
-}
-
-.title-pad {
-  padding-bottom: 7%;
-}
-
-.desc-pad {
-  padding-bottom: 20px;
-}
-
-.contact-text {
-  color: white;
-  font-weight: bold;
-  font-size: 3em;
-}
-
-.body-height {
-  min-height: 40px;
-}
-
-.custom-button-color {
-  background-color: #731cff;
 }
