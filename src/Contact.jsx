@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 function Contact() {
   const heroRef = useRef(null);
-  const [navbarStyle, setNavbarStyle] = useState("transparent");
   const [navbarHeight, setNavbarHeight] = useState(0);
   const navbarRef = useRef(null);
 
@@ -19,12 +18,12 @@ function Contact() {
     return () => window.removeEventListener("resize", measure);
   }, []);
 
-  // Scroll effect for navbar style
+  // Scroll effect for navbar
   useEffect(() => {
     const handleScroll = () => {
       if (heroRef.current) {
         const heroHeight = heroRef.current.offsetHeight;
-        setNavbarStyle(window.scrollY > heroHeight ? "solid" : "transparent");
+        setNavbarStyle(window.scrollY > heroHeight ? "solid" : "white");
       }
     };
     window.addEventListener("scroll", handleScroll);
@@ -34,6 +33,7 @@ function Contact() {
   // Intersection Observer for left text
   const leftTextRef = useRef([]);
   const [visibleLeft, setVisibleLeft] = useState([]);
+
   useEffect(() => {
     leftTextRef.current = leftTextRef.current.slice(0, 3);
     const observer = new IntersectionObserver(
@@ -57,6 +57,7 @@ function Contact() {
   // Intersection Observer for right card
   const cardRef = useRef(null);
   const [visibleCard, setVisibleCard] = useState(false);
+
   useEffect(() => {
     if (!cardRef.current) return;
     const observer = new IntersectionObserver(
@@ -72,42 +73,85 @@ function Contact() {
   }, []);
 
   return (
-    <div>
+    <div style={{ overflowX: "hidden" }}>
+
+      {/* Responsive CSS */}
+      <style>{`
+        body {
+          overflow-x: hidden;
+        }
+
+        @media (max-width: 768px) {
+          .portfolio-navbar .nav-btn {
+            font-size: 0.75rem !important;
+            padding: 0.25rem 0.5rem !important;
+            margin: 0 2px !important;
+            white-space: nowrap;
+          }
+        }
+
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1050; /* higher than other elements */
+
+        @media (max-width: 768px) {
+          .portfolio-navbar .nav-btn {
+            font-size: 0.75rem;       /* smaller font */
+            padding: 0.25rem 0.5rem;  /* smaller padding */
+            margin: 0 2px;            /* reduce gaps between buttons */
+          }
+        }
+
+        @media (max-width: 768px) {
+        .left-section {
+          background-size: cover;
+          background-position: center;
+          width: 100%;
+          height: auto; /* let it shrink naturally */
+        }
+        .contact-main {
+          flex-direction: column !important;
+        }
+      }
+      `}</style>
+
       {/* Navbar */}
       <nav
         ref={navbarRef}
-        className="navbar fixed-top portfolio-navbar"
+        className="navbar portfolio-navbar"
         style={{
-          backgroundColor: navbarStyle === "transparent" ? "transparent" : "white",
+          position: "fixed",      // always stick to top
+          top: 0,
+          left: 0,
+          width: "100%",
+          zIndex: 1050,
+          backgroundColor: "white", // always solid white
           padding: "0.5rem 1rem",
-          zIndex: 1000,
-          boxShadow:
-            navbarStyle === "transparent" ? "none" : "0 2px 6px rgba(0,0,0,0.2)",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
           transition: "all 0.3s ease",
         }}
       >
         <div className="container-fluid d-flex justify-content-center">
-          <div className="d-flex gap-3 align-items-center flex-wrap justify-content-center">
-            {["About", "My Projects", "Contact Me"].map((text, i) => {
-              const isTransparent = navbarStyle === "transparent";
-              return (
-                <Link
-                  key={i}
-                  to={i === 0 ? "/" : i === 1 ? "/projects" : "/contact"}
-                  className="btn nav-btn fw-bold"
-                  style={{
-                    color: "black",
-                    backgroundColor: "white",
-                    boxShadow: "0 4px 6px rgba(0,0,0,0.3)",
-                    borderRadius: "5px",
-                    fontWeight: "bold",
-                    transition: "all 0.3s ease",
-                  }}
-                >
-                  {text}
-                </Link>
-              );
-            })}
+          <div className="d-flex gap-2 align-items-center flex-wrap justify-content-center">
+            {["About", "My Projects", "Contact Me"].map((text, i) => (
+              <Link
+                key={i}
+                to={i === 0 ? "/" : i === 1 ? "/projects" : "/contact"}
+                className="btn nav-btn fw-bold"
+                style={{
+                  color: "black",
+                  backgroundColor: "white",
+                  borderRadius: "5px",
+                  fontWeight: "bold",
+                  boxShadow: "0 4px 6px rgba(0,0,0,0.3)",
+                  transition: "all 0.3s ease",
+                }}
+              >
+                {text}
+              </Link>
+            ))}
           </div>
         </div>
       </nav>
@@ -116,14 +160,14 @@ function Contact() {
       <div
         ref={heroRef}
         style={{
-          paddingTop: `${navbarHeight}px`,
+          paddingTop: `${navbarHeight}px`,  // keep navbar from covering content
           minHeight: "100vh",
           display: "flex",
           flexDirection: "row",
         }}
-        className="main-section"
+        className="contact-main"
       >
-        {/* LEFT SIDE - Background Image + Text */}
+        {/* LEFT SIDE */}
         <div
           className="left-section"
           style={{
@@ -136,7 +180,6 @@ function Contact() {
             justifyContent: "center",
             padding: "3rem",
             color: "white",
-            position: "relative",
           }}
         >
           <div style={{ maxWidth: "500px", fontSize: "1.5rem", fontWeight: "500" }}>
@@ -144,61 +187,49 @@ function Contact() {
               "Interested in my work?",
               "Whether you're a client or an employer, let's connect.",
               "Send me a message.",
-            ].map((text, idx) => (
+            ].map((txt, idx) => (
               <h3
                 key={idx}
                 ref={(el) => (leftTextRef.current[idx] = el)}
                 className="display-6 fw-bold"
                 style={{
                   opacity: visibleLeft[idx] ? 1 : 0,
-                  transform: visibleLeft[idx] ? "translateX(0)" : "translateX(-50px)",
+                  transform: visibleLeft[idx]
+                    ? "translateX(0)"
+                    : "translateX(-50px)",
                   transition: `all 0.6s ease ${idx * 0.2}s`,
                   marginBottom: "2rem",
                 }}
               >
-                {text}
+                {txt}
               </h3>
             ))}
 
-            {/* Scroll Down Indicator */}
-            <div className="scroll-indicator d-block d-md-none">
-              <div style={{ textAlign: "center", fontSize: "14px", marginTop: "1rem" }}>
-                <div>Scroll down to see more</div>
-                <div
-                  style={{
-                    fontSize: "12px",
-                    marginTop: "5px",
-                    display: "inline-block",
-                    animation: "bob 3s ease-in-out infinite",
-                  }}
-                >
-                  ▼
-                </div>
+            {/* Scroll Down Indicator on Mobile */}
+            <div className="d-block d-md-none text-center mt-3">
+              <div style={{ fontSize: "14px" }}>Scroll down to see more</div>
+              <div
+                style={{
+                  fontSize: "12px",
+                  animation: "bob 3s ease-in-out infinite",
+                }}
+              >
+                ▼
               </div>
             </div>
-
-            <style>
-              {`
-                @keyframes bob {
-                  0%, 100% { transform: translateY(0); }
-                  50% { transform: translateY(-10px); }
-                }
-              `}
-            </style>
+            <style>{`
+              @keyframes bob {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-10px); }
+              }
+            `}</style>
           </div>
         </div>
 
-        {/* RIGHT SIDE - Contact Card */}
+        {/* RIGHT SIDE - Contact Info */}
         <div
-          className="right-section"
-          style={{
-            flex: 1,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "2rem",
-            backgroundColor: "#f9f9f9",
-          }}
+          className="right-section d-flex align-items-center justify-content-center p-3"
+          style={{ flex: 1, backgroundColor: "#f9f9f9" }}
         >
           <div
             ref={cardRef}
@@ -214,7 +245,7 @@ function Contact() {
               transition: "all 0.6s ease",
             }}
           >
-            <h4 className="mb-4 fw-bold text-center">Contact Me</h4>
+            <h4 className="fw-bold text-center mb-4">Contact Me</h4>
             <p>
               <strong>Email:</strong>{" "}
               <a href="mailto:luyjayrus03@gmail.com">luyjayrus03@gmail.com</a>
@@ -226,27 +257,14 @@ function Contact() {
         </div>
       </div>
 
-      {/* Responsive CSS */}
-      <style>
-        {`
-          @media (max-width: 768px) {
-            .main-section {
-              flex-direction: column !important;
-            }
-            .left-section, .right-section {
-              flex: unset !important;
-              width: 100%;
-            }
-            .portfolio-navbar {
-              padding: 0.3rem 0.5rem !important;
-            }
-            .portfolio-navbar .nav-btn {
-              padding: 0.25rem 0.5rem !important;
-              font-size: 0.85rem !important;
-            }
+      {/* Responsive layout for mobile */}
+      <style>{`
+        @media (max-width: 768px) {
+          .contact-main {
+            flex-direction: column !important;
           }
-        `}
-      </style>
+        }
+      `}</style>
     </div>
   );
 }

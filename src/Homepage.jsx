@@ -129,6 +129,18 @@ function Homepage() {
 
   return (
     <div>
+      <style>
+      {`
+        /* Mobile navbar button adjustments */
+        @media (max-width: 768px) {
+          .portfolio-navbar .nav-btn {
+            font-size: 0.75rem;       /* smaller font */
+            padding: 0.25rem 0.5rem;  /* smaller padding */
+            margin: 0 2px;            /* reduce gaps between buttons */
+          }
+        }
+      `}
+      </style>      
       {/* Navbar */}
       <nav
         className="navbar fixed-top portfolio-navbar"
