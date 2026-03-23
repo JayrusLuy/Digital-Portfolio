@@ -34,6 +34,11 @@ function Projects() {
   const [navbarStyle, setNavbarStyle] = useState('transparent');
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
+  // page start at top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // prms animation refs and states
   const prmsRef = useRef(null);
   const prmsImageRef = useRef(null);
@@ -443,14 +448,14 @@ const handlePrevSg = () => {
     transition: 'all 0.3s ease',
     }}
     >
-    <div className="container justify-content-center">
+    <div className="container-fluid d-flex justify-content-center">
     <div className="d-flex gap-3 align-items-center">
-      {['About', 'My Projects'].map((text, i) => {
+      {['About', 'My Projects', 'Contact Me'].map((text, i) => {
         const isTransparent = navbarStyle === 'transparent';
         return (
           <Link
             key={i}
-            to={i === 0 ? '/' : '/projects'}
+            to={i === 0 ? '/' : i === 1 ? '/projects' : '/contact'}
             className="btn nav-btn fw-bold"
             style={{
               color: isTransparent ? 'white' : 'black',

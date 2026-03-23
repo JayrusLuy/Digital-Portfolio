@@ -103,47 +103,66 @@ function Homepage() {
     return () => observer.disconnect();
   }, []);
 
+  // Ensure page starts at top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const [navbarStyle, setNavbarStyle] = useState('transparent');
+
+  // Scroll effect for navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      if (heroRef.current) {
+        const heroHeight = heroRef.current.offsetHeight;
+        setNavbarStyle(window.scrollY > heroHeight ? 'solid' : 'transparent');
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Ensure page starts at top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       {/* Navbar */}
       <nav
         className="navbar fixed-top portfolio-navbar"
         style={{
+          backgroundColor: navbarStyle === 'transparent' ? 'transparent' : 'white',
+          padding: '0.5rem 1rem',
+          zIndex: 1000,
+          boxShadow: navbarStyle === 'transparent' ? 'none' : '0 2px 6px rgba(0,0,0,0.2)',
           transition: 'all 0.3s ease',
-          backgroundColor: navbarScrolled ? 'white' : 'transparent',
-          boxShadow: navbarScrolled ? '0 4px 6px rgb(255, 255, 255)' : 'none', // add shadow only when white
         }}
       >
-
-        <div className="container justify-content-center">
-          <div className="d-flex gap-3">
-            <Link
-              to="/"
-              className="btn nav-btn fw-bold"
-              style={{
-                color: navbarScrolled ? 'black' : 'white',
-                border: navbarScrolled ? 'none' : '1px solid rgba(255,255,255,1)',
-                boxShadow: navbarScrolled ? '0 4px 6px rgba(0,0,0,0.2)' : 'none',
-                borderRadius: '5px',
-                backgroundColor: navbarScrolled ? '#ffffff' : 'transparent',
-              }}
-            >
-              About
-            </Link>
-
-            <Link
-              to="/projects"
-              className="btn nav-btn fw-bold"
-              style={{
-                color: navbarScrolled ? 'black' : 'white',
-                border: navbarScrolled ? 'none' : '1px solid rgba(255,255,255,1)',
-                boxShadow: navbarScrolled ? '0 4px 6px rgba(0,0,0,0.2)' : 'none',
-                borderRadius: '5px',
-                backgroundColor: 'transparent',
-              }}
-            >
-              My Projects
-            </Link>
+        <div className="container-fluid d-flex justify-content-center">
+          <div className="d-flex gap-3 align-items-center">
+            {['About', 'My Projects', 'Contact Me'].map((text, i) => {
+              const isTransparent = navbarStyle === 'transparent';
+              return (
+                <Link
+                  key={i}
+                  to={i === 0 ? '/' : i === 1 ? '/projects' : '/contact'}
+                  className="btn nav-btn fw-bold"
+                  style={{
+                    color: isTransparent ? 'white' : 'black',
+                    backgroundColor: isTransparent ? 'transparent' : 'white',
+                    border: isTransparent ? '1px solid white' : 'none',
+                    boxShadow: '0 4px 6px rgba(0,0,0,0.3)',
+                    borderRadius: '5px',
+                    fontWeight: 'bold',
+                    transition: 'all 0.3s ease',
+                  }}
+                >
+                  {text}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </nav>

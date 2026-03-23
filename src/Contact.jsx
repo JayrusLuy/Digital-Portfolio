@@ -1,181 +1,252 @@
 import React, { useState, useEffect, useRef } from "react";
-import Pfp from "./assets/profile picture/pfp.png";
+import Background2 from "./assets/background 2.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
-import Emailme from "./Emailme";
 
 function Contact() {
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
-  const [body, setBody] = useState("");
-  const [showModal, setShowModal] = useState(true);
+  const heroRef = useRef(null);
+  const [navbarStyle, setNavbarStyle] = useState("transparent");
   const [navbarHeight, setNavbarHeight] = useState(0);
   const navbarRef = useRef(null);
 
+  // Measure navbar height
   useEffect(() => {
-    // measure navbar after mount
     const measure = () => {
-      if (navbarRef.current) {
-        setNavbarHeight(navbarRef.current.offsetHeight);
-      }
+      if (navbarRef.current) setNavbarHeight(navbarRef.current.offsetHeight);
     };
     measure();
-
-    // update on resize / font changes
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const result = await Emailme(email, subject, body);
-      alert(result?.message || "Something went wrong!");
-      setEmail("");
-      setSubject("");
-      setBody("");
-    } catch (err) {
-      alert("Something went wrong!");
-    }
-  };
+  // Scroll effect for navbar style
+  useEffect(() => {
+    const handleScroll = () => {
+      if (heroRef.current) {
+        const heroHeight = heroRef.current.offsetHeight;
+        setNavbarStyle(window.scrollY > heroHeight ? "solid" : "transparent");
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const closeModal = () => setShowModal(false);
+  // Intersection Observer for left text
+  const leftTextRef = useRef([]);
+  const [visibleLeft, setVisibleLeft] = useState([]);
+  useEffect(() => {
+    leftTextRef.current = leftTextRef.current.slice(0, 3);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setVisibleLeft((prev) => {
+              const newVis = [...prev];
+              newVis[index] = true;
+              return newVis;
+            });
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    leftTextRef.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
-  // Provide a sensible fallback so padding isn't huge on first render
-  const paddingTop = navbarHeight ? `${navbarHeight + 16}px` : "72px";
+  // Intersection Observer for right card
+  const cardRef = useRef(null);
+  const [visibleCard, setVisibleCard] = useState(false);
+  useEffect(() => {
+    if (!cardRef.current) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setVisibleCard(true);
+        });
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div>
       {/* Navbar */}
       <nav
         ref={navbarRef}
-        className="navbar navbar-dark fixed-top w-100"
-        style={{ background: "linear-gradient(to right, #731cff, #b366ff)" }}
+        className="navbar fixed-top portfolio-navbar"
+        style={{
+          backgroundColor: navbarStyle === "transparent" ? "transparent" : "white",
+          padding: "0.5rem 1rem",
+          zIndex: 1000,
+          boxShadow:
+            navbarStyle === "transparent" ? "none" : "0 2px 6px rgba(0,0,0,0.2)",
+          transition: "all 0.3s ease",
+        }}
       >
-        <div className="container d-flex align-items-center" style={{ gap: "1rem" }}>
-          <Link to="/contact" className="d-flex align-items-center flex-shrink-0">
-            <img src={Pfp} alt="Profile" className="pfp" />
-          </Link>
-
-          <div className="d-flex flex-column flex-grow-1">
-            <div>
-              <h3 className="fw-bold mb-1 text-white">Jayrus T. Luy</h3>
-              <h5 className="fw-semibold text-white mb-2">Online Portfolio</h5>
-            </div>
-
-            <div className="d-flex flex-wrap" style={{ gap: "1rem" }}>
-              <Link className="nav-link text-white p-0 me-1" to="/">
-                About me
-              </Link>
-              <Link className="nav-link text-white p-0 me-1" to="/projects">
-                My projects
-              </Link>
-            </div>
+        <div className="container-fluid d-flex justify-content-center">
+          <div className="d-flex gap-3 align-items-center flex-wrap justify-content-center">
+            {["About", "My Projects", "Contact Me"].map((text, i) => {
+              const isTransparent = navbarStyle === "transparent";
+              return (
+                <Link
+                  key={i}
+                  to={i === 0 ? "/" : i === 1 ? "/projects" : "/contact"}
+                  className="btn nav-btn fw-bold"
+                  style={{
+                    color: "black",
+                    backgroundColor: "white",
+                    boxShadow: "0 4px 6px rgba(0,0,0,0.3)",
+                    borderRadius: "5px",
+                    fontWeight: "bold",
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  {text}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </nav>
 
-      {/* Responsive padding */}
-      <div style={{ paddingTop: `${navbarHeight + 16}px` }}>
-        <div className="container">
-          <div className="row g-4 align-items-start">
-            {/* Contact text */}
-            <div className="col-12 col-md-6 text-light contact-text">
-              <p>
-                If you're a recruiter and
-                <br />
-                found my portfolio intriguing,
-                <br />
-                feel free to contact me.
-              </p>
-            </div>
+      {/* Main Section */}
+      <div
+        ref={heroRef}
+        style={{
+          paddingTop: `${navbarHeight}px`,
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "row",
+        }}
+        className="main-section"
+      >
+        {/* LEFT SIDE - Background Image + Text */}
+        <div
+          className="left-section"
+          style={{
+            flex: 1,
+            backgroundImage: `url(${Background2})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "3rem",
+            color: "white",
+            position: "relative",
+          }}
+        >
+          <div style={{ maxWidth: "500px", fontSize: "1.5rem", fontWeight: "500" }}>
+            {[
+              "Interested in my work?",
+              "Whether you're a client or an employer, let's connect.",
+              "Send me a message.",
+            ].map((text, idx) => (
+              <h3
+                key={idx}
+                ref={(el) => (leftTextRef.current[idx] = el)}
+                className="display-6 fw-bold"
+                style={{
+                  opacity: visibleLeft[idx] ? 1 : 0,
+                  transform: visibleLeft[idx] ? "translateX(0)" : "translateX(-50px)",
+                  transition: `all 0.6s ease ${idx * 0.2}s`,
+                  marginBottom: "2rem",
+                }}
+              >
+                {text}
+              </h3>
+            ))}
 
-            {/* Email me card */}
-            <div className="col-12 col-md-6 d-flex">
-              <div className="card text-white bg-dark mb-3 flex-fill custom-card-border">
-                <div className="card-body">
-                  <form onSubmit={handleSubmit}>
-                    <div className="mb-3">
-                      <label className="form-label">Email address</label>
-                      <input
-                        type="email"
-                        className="form-control"
-                        placeholder="Enter your email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        style={{ borderColor: "#731cff" }}
-                        required
-                      />
-                    </div>
-
-                    <div className="mb-3">
-                      <label className="form-label">Subject</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Enter subject"
-                        value={subject}
-                        onChange={(e) => setSubject(e.target.value)}
-                        style={{ borderColor: "#731cff" }}
-                        required
-                      />
-                    </div>
-
-                    <div className="mb-3">
-                      <label className="form-label">Body</label>
-                      <textarea
-                        className="form-control"
-                        rows="6"
-                        style={{ resize: "vertical", borderColor: "#731cff" }}
-                        value={body}
-                        onChange={(e) => setBody(e.target.value)}
-                        required
-                      />
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="btn w-100"
-                      style={{ backgroundColor: "#731cff", color: "white" }}
-                    >
-                      Submit
-                    </button>
-                  </form>
+            {/* Scroll Down Indicator */}
+            <div className="scroll-indicator d-block d-md-none">
+              <div style={{ textAlign: "center", fontSize: "14px", marginTop: "1rem" }}>
+                <div>Scroll down to see more</div>
+                <div
+                  style={{
+                    fontSize: "12px",
+                    marginTop: "5px",
+                    display: "inline-block",
+                    animation: "bob 3s ease-in-out infinite",
+                  }}
+                >
+                  ▼
                 </div>
               </div>
             </div>
+
+            <style>
+              {`
+                @keyframes bob {
+                  0%, 100% { transform: translateY(0); }
+                  50% { transform: translateY(-10px); }
+                }
+              `}
+            </style>
+          </div>
+        </div>
+
+        {/* RIGHT SIDE - Contact Card */}
+        <div
+          className="right-section"
+          style={{
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "2rem",
+            backgroundColor: "#f9f9f9",
+          }}
+        >
+          <div
+            ref={cardRef}
+            style={{
+              width: "100%",
+              maxWidth: "500px",
+              background: "white",
+              padding: "2rem",
+              borderRadius: "10px",
+              boxShadow: "0 8px 25px rgba(0,0,0,0.2)",
+              opacity: visibleCard ? 1 : 0,
+              transform: visibleCard ? "translateX(0)" : "translateX(50px)",
+              transition: "all 0.6s ease",
+            }}
+          >
+            <h4 className="mb-4 fw-bold text-center">Contact Me</h4>
+            <p>
+              <strong>Email:</strong>{" "}
+              <a href="mailto:luyjayrus03@gmail.com">luyjayrus03@gmail.com</a>
+            </p>
+            <p>
+              <strong>Mobile:</strong> 0915 704 3239
+            </p>
           </div>
         </div>
       </div>
 
-      {/* Modal */}
-      {showModal && (
-        <div
-          className="modal show fade"
-          style={{ display: "block", backgroundColor: "rgba(0,0,0,0.6)" }}
-        >
-          <div className="modal-dialog modal-dialog-centered">
-            <div
-              className="modal-content"
-              style={{ backgroundColor: "#000", borderColor: "#731cff" }}
-            >
-              <div className="modal-header" style={{ borderColor: "#731cff" }}>
-                <h5 className="modal-title text-white">Notice</h5>
-                <button type="button" className="btn-close btn-close-white" onClick={closeModal}></button>
-              </div>
-              <div className="modal-body text-white" style={{ borderTop: "1px solid #731cff", borderBottom: "1px solid #731cff" }}>
-                Backend functionalities are not working due to GitHub Pages limitations.
-                This page only serves as proof that Node.js was used in this Online Portfolio.
-              </div>
-              <div className="modal-footer" style={{ borderColor: "#731cff" }}>
-                <button className="btn" style={{ backgroundColor: "#731cff", color: "white" }} onClick={closeModal}>
-                  Okay
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Responsive CSS */}
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .main-section {
+              flex-direction: column !important;
+            }
+            .left-section, .right-section {
+              flex: unset !important;
+              width: 100%;
+            }
+            .portfolio-navbar {
+              padding: 0.3rem 0.5rem !important;
+            }
+            .portfolio-navbar .nav-btn {
+              padding: 0.25rem 0.5rem !important;
+              font-size: 0.85rem !important;
+            }
+          }
+        `}
+      </style>
     </div>
   );
 }
