@@ -1207,6 +1207,22 @@ const handlePrevSg = () => {
           />
         ))}
       </div>
+      <style>{`
+      @keyframes galleryDrop {
+        0% { opacity: 0; transform: translateY(-80px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes slideNext {
+        0% { opacity: 0; transform: translateX(40px) scale(0.98); }
+        100% { opacity: 1; transform: translateX(0) scale(1); }
+      }
+
+      @keyframes slidePrev {
+        0% { opacity: 0; transform: translateX(-40px) scale(0.98); }
+        100% { opacity: 1; transform: translateX(0) scale(1); }
+      }
+    `}</style>
 
       {/* Navigation buttons */}
       {['prev', 'next'].map((dir) => (
