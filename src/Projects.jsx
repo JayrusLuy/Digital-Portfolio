@@ -551,19 +551,19 @@ const handlePrevSg = () => {
           }}
         >
           {[
-            { text: 'View more images', link: '#' },
-            { text: 'View code on GitHub', link: 'https://github.com/JayrusLuy/Patient-Record-Management-System-Administrators-Application' }
+            { text: 'View more images', link: '#', gallery: true },
+            { text: 'View code on GitHub', link: 'https://github.com/JayrusLuy/Patient-Record-Management-System-Administrators-Application', gallery: false }
           ].map((btn, i) => (
             <a
-              onClick={(e) => {
+              key={i}
+              href={btn.link}
+              onClick={btn.gallery ? (e) => {
                 e.preventDefault();
                 setShowPrmsGallery(true);
-              }}
-                            key={i}
-              href={btn.link}
+              } : undefined}
               className="btn nav-btn fw-bold"
-              target={btn.link.includes('github') ? '_blank' : undefined}
-              rel={btn.link.includes('github') ? 'noopener noreferrer' : undefined}
+              target={!btn.gallery ? "_blank" : undefined}
+              rel={!btn.gallery ? "noopener noreferrer" : undefined}
               style={{
                 color: 'white',
                 backgroundColor: 'transparent',
